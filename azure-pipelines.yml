@@ -10,7 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  stage_build_microservice: true
   ms_version: '1.0'
   container_registry: 'dockerhub_demo'
 
@@ -18,7 +17,6 @@ stages:
 
 - stage: BUILD
   displayName: 'Build Microservice'
-  condition: and(succeeded(), eq(variables['stage_build_microservice'], true))
   jobs:
   - job: Build_Docker_Image
     displayName: Build Docker Image
