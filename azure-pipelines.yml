@@ -24,7 +24,7 @@ stages:
       enabled: true
       inputs:
         containerRegistry: 'dockerhub_demo'
-        repository: 'demo/hybridapp'
+        repository: 'neudesicappmode/hybridappdemo'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
