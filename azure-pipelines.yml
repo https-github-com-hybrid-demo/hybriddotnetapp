@@ -25,7 +25,7 @@ stages:
       inputs:
         containerRegistry: 'dockerhub_demo'
         repository: 'demo/hybridapp'
-        command: 'build'
+        command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
         arguments: '--no-cache'
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
