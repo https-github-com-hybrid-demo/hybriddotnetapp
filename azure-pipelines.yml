@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  tage_build_microservice: true
+  stage_build_microservice: true
   ms_version: '1.0'
   container_registry: 'dockerhub_demo'
 
