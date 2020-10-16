@@ -9,11 +9,31 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  tage_build_microservice: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+parameters:
+  ms_version: '1.0'
+  container_registry: 'dockerhub_demo'
+
+stages:
+
+- stage: BUILD
+  displayName: 'Build Microservice'
+  condition: and(succeeded(), eq(variables['stage_build_microservice'], true))
+  jobs:
+  - job: Build_Docker_Image
+    displayName: Build Docker Image
+    steps:
+    - task: Docker@2
+      displayName: Build Docker Image
+      enabled: true
+      inputs:
+        containerRegistry: '${{ parameters.container_registry }}'
+        repository: 'demo/hybridapp'
+        command: 'build'
+        Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
+        arguments: '--no-cache'
+        buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
+        tags: '${{ parameters.ms_version }}.$(Build.BuildId)'
+        addPipelineData: true
