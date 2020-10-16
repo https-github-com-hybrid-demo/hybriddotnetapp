@@ -6,6 +6,8 @@
 trigger:
 - master
 
+name: $(Build.BuildId).$(Date:yyyyMMdd).$(Rev:r)
+
 pool:
   vmImage: 'ubuntu-latest'
 
