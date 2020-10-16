@@ -4,16 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- main
 
 name: $(Build.BuildId).$(Date:yyyyMMdd).$(Rev:r)
 
 pool:
   vmImage: 'ubuntu-latest'
-
-variables:
-  ms_version: '1.0'
-  container_registry: 'dockerhub_demo'
 
 stages:
 
