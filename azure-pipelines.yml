@@ -27,7 +27,6 @@ stages:
         repository: 'demo/hybridapp'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
-        arguments: '--no-cache'
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
         tags: '1.0.$(Build.BuildId)'
         addPipelineData: true
