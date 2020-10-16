@@ -11,8 +11,6 @@ pool:
 
 variables:
   tage_build_microservice: true
-
-parameters:
   ms_version: '1.0'
   container_registry: 'dockerhub_demo'
 
@@ -29,11 +27,11 @@ stages:
       displayName: Build Docker Image
       enabled: true
       inputs:
-        containerRegistry: '${{ parameters.container_registry }}'
+        containerRegistry: 'dockerhub_demo'
         repository: 'demo/hybridapp'
         command: 'build'
         Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
         arguments: '--no-cache'
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
-        tags: '${{ parameters.ms_version }}.$(Build.BuildId)'
+        tags: '1.0.$(Build.BuildId)'
         addPipelineData: true
