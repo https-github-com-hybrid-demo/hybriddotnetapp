@@ -33,7 +33,7 @@ stages:
         tags: '1.0.$(Build.BuildId)'
         addPipelineData: true
 
-- stage: Deploy
+- stage: Deploy_DEV
   displayName: 'Deploy to DEV'
   jobs:
     - job: Deploy_webapp
@@ -49,3 +49,25 @@ stages:
           DockerNamespace: 'registry.hub.docker.com/neudesicappmode'
           DockerRepository: 'hybridappdemo'
           DockerImageTag: '1.0.$(Build.BuildId)'
+
+- stage: Deploy_TEST
+  displayName: 'Deploy to TEST'
+  jobs:
+  - deployment: DeployMSTest
+    displayName: Deploy MS in Test
+    environment: 
+      name: 'test'                
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            displayName: 'Deploy container to Azure AppService'
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'neudesic-free-trial-nasdag-demo-rg'
+              appType: 'webAppContainer'
+              WebAppName: 'azuredevopsgithub'
+              DockerNamespace: 'registry.hub.docker.com/neudesicappmode'
+              DockerRepository: 'hybridappdemo'
+              DockerImageTag: '1.0.$(Build.BuildId)'
