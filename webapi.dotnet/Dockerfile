@@ -15,6 +15,9 @@ RUN dotnet build "webapi.dotnet.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "webapi.dotnet.csproj" -c Release -o /app/publish
 
+# REMOVE: to test snyk cve scanning
+ENV SECRET_KEY JHGKJHG23123%^$%JKHDFKHSDKJFASJKD
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
