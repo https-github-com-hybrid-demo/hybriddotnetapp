@@ -6,6 +6,8 @@
 trigger:
 - main
 
+pr: none
+
 name: $(Build.BuildId).$(Date:yyyyMMdd).$(Rev:r)
 
 pool:
