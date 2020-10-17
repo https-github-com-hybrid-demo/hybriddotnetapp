@@ -5,7 +5,11 @@
 # information on Anchore's container image scanning tool Grype, see
 # https://github.com/anchore/grype
 name: Anchore Container Scan
-on: push
+
+on:
+  pull_request:
+    branches: [main]
+  
 jobs:
   Anchore-Build-Scan:
     runs-on: ubuntu-latest
@@ -13,7 +17,7 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+      run: docker build ./webapi.dotnet --file ./webapi.dotnet/Dockerfile --tag localbuild/testimage:latest
     - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
       uses: anchore/scan-action@main
       with:
