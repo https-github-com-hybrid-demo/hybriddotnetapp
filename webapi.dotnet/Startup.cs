@@ -55,8 +55,8 @@ namespace webapi.dotnet
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Cloud Native - Neudesic App Mode ToDo API",
-                    Description = "Cloud Native - Neudesic App Mode Initiative",
+                    Title = "Azure devops - GitHub Demo Application",
+                    Description = "Hybrid workflow for devops",
                 });
             });
         }
