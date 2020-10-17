@@ -25,8 +25,6 @@ jobs:
         acs-report-enable: true
         fail-build: true
         severity-cutoff: critical
-    - name: grype scan JSON results
-      run: for j in `ls ./anchore-reports/*.json`; do echo "---- ${j} ----"; cat ${j}; echo; done
     - name: Inspect action SARIF report
       run: cat results.sarif
     - name: Upload Anchore Scan Report
