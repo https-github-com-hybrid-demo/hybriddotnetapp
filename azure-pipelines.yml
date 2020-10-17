@@ -30,3 +30,19 @@ stages:
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
         tags: '1.0.$(Build.BuildId)'
         addPipelineData: true
+
+- stage: Deploy
+  displayName: 'Deploy to DEV'
+  jobs:
+    - job: Deploy_webapp
+      displayName: Deploy webapp
+      steps:
+      - task: AzureRmWebAppDeployment@4
+        inputs:
+          ConnectionType: 'AzureRM'
+          azureSubscription: 'neudesic-free-trial-nasdag-demo-rg'
+          appType: 'webAppContainer'
+          WebAppName: 'azuredevopsgithub'
+          DockerNamespace: 'registry.hub.docker.com/neudesicappmode'
+          DockerRepository: 'hybridappdemo'
+          DockerImageTag: '1.0.$(Build.BuildId)'
