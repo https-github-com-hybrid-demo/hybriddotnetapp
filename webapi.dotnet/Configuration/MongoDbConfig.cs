@@ -12,12 +12,14 @@ namespace webapi.dotnet.Configuration
         public int Port { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
+        public bool IsManaged { get; set; }
         public string ConnectionString
         {
             get
             {
-                if (string.IsNullOrEmpty(User) || string.IsNullOrEmpty(Password))
-                    return $@"mongodb://{Host}:{Port}";
+               if (IsManaged == true) {
+                    return $@"mongodb+srv://{User}:{Password}@{Host}";
+                } 
                 return $@"mongodb://{User}:{Password}@{Host}:{Port}";
             }
         }

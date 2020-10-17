@@ -16,6 +16,7 @@ services:
       MongoDB__Port: 27017
       MongoDB__User: root
       MongoDB__Password: password!@123
+      MongoDB__IsManaged: false
     depends_on:
       - mongo
 
