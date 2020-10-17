@@ -18,9 +18,10 @@ namespace webapi.dotnet.Configuration
             get
             {
                if (IsManaged == true) {
-                    return $@"mongodb+srv://{User}:{Password}@{Host}";
+                    return $@"mongodb+srv://{User}:{Password}@{Host}/TodoDB?retryWrites=true&w=majority";
                 } 
                 return $@"mongodb://{User}:{Password}@{Host}:{Port}";
+                
             }
         }
     }
