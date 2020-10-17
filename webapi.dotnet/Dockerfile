@@ -1,8 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 
-RUN adduser --quiet --disabled-password --shell /bin/zsh --home /home/devuser --gecos "User" devuser 
-USER devuser
-
 WORKDIR /app
 ENV ASPNETCORE_URLS http://+:8000
 EXPOSE 8000
