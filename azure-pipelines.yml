@@ -22,14 +22,14 @@ stages:
   displayName: 'Build Microservice'
   jobs:
   - job: Build_Docker_Image
-    displayName: Build Docker Image
+    displayName: Build Application
     steps:
     - task: Docker@2
-      displayName: Build Docker Image
+      displayName: Build & Push Docker Image
       enabled: true
       inputs:
         containerRegistry: 'gh-docker-registry-hubrid-demo'
-        repository: 'hybrid-demo/hybridappdemo/dotnet-app'
+        repository: 'hybrid-demo/hybridappdemo/dotnet-demo-app'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/webapi.dotnet/Dockerfile'
         buildContext: '$(Build.SourcesDirectory)/webapi.dotnet'
@@ -49,7 +49,7 @@ stages:
           appType: 'webAppContainer'
           WebAppName: 'azuredevopsgithub'
           DockerNamespace: 'docker.pkg.github.com'
-          DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-app'
+          DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-demo-app'
           DockerImageTag: '1.0.$(Build.BuildId)'
 
 - stage: Deploy_TEST
@@ -71,5 +71,5 @@ stages:
               appType: 'webAppContainer'
               WebAppName: 'azuredevopsgithub'
               DockerNamespace: 'docker.pkg.github.com'
-              DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-app'
+              DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-demo-app'
               DockerImageTag: '1.0.$(Build.BuildId)'
