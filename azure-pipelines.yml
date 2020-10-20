@@ -40,19 +40,24 @@ stages:
 - stage: Deploy_DEV
   displayName: 'Deploy to DEV'
   jobs:
-    - job: Deploy_webapp
-      displayName: Deploy webapp
-      steps:
-      - task: AzureRmWebAppDeployment@4
-        displayName: 'Deploy container to Azure AppService'
-        inputs:
-          ConnectionType: 'AzureRM'
-          azureSubscription: 'neudesic-free-trial-nasdag-demo-rg'
-          appType: 'webAppContainer'
-          WebAppName: 'azuredevopsgithub'
-          DockerNamespace: 'docker.pkg.github.com'
-          DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-demo-app'
-          DockerImageTag: '1.0.$(Build.BuildId)'
+    - deployment: DeployMSTest
+      displayName: Deploy MS in Dev
+      environment: 
+        name: 'dev'                
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: AzureRmWebAppDeployment@4
+              displayName: 'Deploy container to Azure AppService'
+              inputs:
+                ConnectionType: 'AzureRM'
+                azureSubscription: 'neudesic-free-trial-nasdag-demo-rg'
+                appType: 'webAppContainer'
+                WebAppName: 'azuredevopsgithub'
+                DockerNamespace: 'docker.pkg.github.com'
+                DockerRepository: 'hybrid-demo/hybridappdemo/dotnet-demo-app'
+                DockerImageTag: '1.0.$(Build.BuildId)'
 
 - stage: Deploy_TEST
   displayName: 'Deploy to TEST'
