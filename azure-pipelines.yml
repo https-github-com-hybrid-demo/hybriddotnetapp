@@ -11,6 +11,8 @@ trigger:
     exclude:
     - releases/old*
 
+pr : none
+
 name: $(Build.BuildId).$(Date:yyyyMMdd).$(Rev:r)
 
 pool:
