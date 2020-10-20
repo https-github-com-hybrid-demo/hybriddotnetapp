@@ -55,7 +55,7 @@ namespace webapi.dotnet
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Azure devops - GitHub Demo Application - dotnet app",
+                    Title = "Azure devops - GitHub Demo Application - dotnet demo app",
                     Description = "Hybrid workflow for devops",
                 });
             });
